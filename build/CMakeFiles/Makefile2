@@ -85,12 +85,12 @@ clean: CMakeFiles/WizardAcademy.dir/clean
 CMakeFiles/WizardAcademy.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target WizardAcademy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target WizardAcademy"
 .PHONY : CMakeFiles/WizardAcademy.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/WizardAcademy.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/WizardAcademy.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles 0
 .PHONY : CMakeFiles/WizardAcademy.dir/rule
@@ -102,7 +102,7 @@ WizardAcademy: CMakeFiles/WizardAcademy.dir/rule
 # codegen rule for target.
 CMakeFiles/WizardAcademy.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Finished codegen for target WizardAcademy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target WizardAcademy"
 .PHONY : CMakeFiles/WizardAcademy.dir/codegen
 
 # clean rule for target.

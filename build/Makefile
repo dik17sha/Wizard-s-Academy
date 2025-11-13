@@ -129,30 +129,6 @@ WizardAcademy/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/build
 .PHONY : WizardAcademy/fast
 
-Wizard_Academy/Source_Files/Camera.o: Wizard_Academy/Source_Files/Camera.cpp.o
-.PHONY : Wizard_Academy/Source_Files/Camera.o
-
-# target to build an object file
-Wizard_Academy/Source_Files/Camera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o
-.PHONY : Wizard_Academy/Source_Files/Camera.cpp.o
-
-Wizard_Academy/Source_Files/Camera.i: Wizard_Academy/Source_Files/Camera.cpp.i
-.PHONY : Wizard_Academy/Source_Files/Camera.i
-
-# target to preprocess a source file
-Wizard_Academy/Source_Files/Camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.i
-.PHONY : Wizard_Academy/Source_Files/Camera.cpp.i
-
-Wizard_Academy/Source_Files/Camera.s: Wizard_Academy/Source_Files/Camera.cpp.s
-.PHONY : Wizard_Academy/Source_Files/Camera.s
-
-# target to generate assembly for a file
-Wizard_Academy/Source_Files/Camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.s
-.PHONY : Wizard_Academy/Source_Files/Camera.cpp.s
-
 Wizard_Academy/Source_Files/EBO.o: Wizard_Academy/Source_Files/EBO.cpp.o
 .PHONY : Wizard_Academy/Source_Files/EBO.o
 
@@ -249,29 +225,29 @@ Wizard_Academy/Source_Files/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.s
 .PHONY : Wizard_Academy/Source_Files/main.cpp.s
 
-Wizard_Academy/Source_Files/shader.o: Wizard_Academy/Source_Files/shader.cpp.o
-.PHONY : Wizard_Academy/Source_Files/shader.o
+Wizard_Academy/Source_Files/stb_image_impl.o: Wizard_Academy/Source_Files/stb_image_impl.cpp.o
+.PHONY : Wizard_Academy/Source_Files/stb_image_impl.o
 
 # target to build an object file
-Wizard_Academy/Source_Files/shader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o
-.PHONY : Wizard_Academy/Source_Files/shader.cpp.o
+Wizard_Academy/Source_Files/stb_image_impl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o
+.PHONY : Wizard_Academy/Source_Files/stb_image_impl.cpp.o
 
-Wizard_Academy/Source_Files/shader.i: Wizard_Academy/Source_Files/shader.cpp.i
-.PHONY : Wizard_Academy/Source_Files/shader.i
+Wizard_Academy/Source_Files/stb_image_impl.i: Wizard_Academy/Source_Files/stb_image_impl.cpp.i
+.PHONY : Wizard_Academy/Source_Files/stb_image_impl.i
 
 # target to preprocess a source file
-Wizard_Academy/Source_Files/shader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.i
-.PHONY : Wizard_Academy/Source_Files/shader.cpp.i
+Wizard_Academy/Source_Files/stb_image_impl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i
+.PHONY : Wizard_Academy/Source_Files/stb_image_impl.cpp.i
 
-Wizard_Academy/Source_Files/shader.s: Wizard_Academy/Source_Files/shader.cpp.s
-.PHONY : Wizard_Academy/Source_Files/shader.s
+Wizard_Academy/Source_Files/stb_image_impl.s: Wizard_Academy/Source_Files/stb_image_impl.cpp.s
+.PHONY : Wizard_Academy/Source_Files/stb_image_impl.s
 
 # target to generate assembly for a file
-Wizard_Academy/Source_Files/shader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.s
-.PHONY : Wizard_Academy/Source_Files/shader.cpp.s
+Wizard_Academy/Source_Files/stb_image_impl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WizardAcademy.dir/build.make CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s
+.PHONY : Wizard_Academy/Source_Files/stb_image_impl.cpp.s
 
 libs/src/glad.o: libs/src/glad.c.o
 .PHONY : libs/src/glad.o
@@ -306,9 +282,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... WizardAcademy"
-	@echo "... Wizard_Academy/Source_Files/Camera.o"
-	@echo "... Wizard_Academy/Source_Files/Camera.i"
-	@echo "... Wizard_Academy/Source_Files/Camera.s"
 	@echo "... Wizard_Academy/Source_Files/EBO.o"
 	@echo "... Wizard_Academy/Source_Files/EBO.i"
 	@echo "... Wizard_Academy/Source_Files/EBO.s"
@@ -321,9 +294,9 @@ help:
 	@echo "... Wizard_Academy/Source_Files/main.o"
 	@echo "... Wizard_Academy/Source_Files/main.i"
 	@echo "... Wizard_Academy/Source_Files/main.s"
-	@echo "... Wizard_Academy/Source_Files/shader.o"
-	@echo "... Wizard_Academy/Source_Files/shader.i"
-	@echo "... Wizard_Academy/Source_Files/shader.s"
+	@echo "... Wizard_Academy/Source_Files/stb_image_impl.o"
+	@echo "... Wizard_Academy/Source_Files/stb_image_impl.i"
+	@echo "... Wizard_Academy/Source_Files/stb_image_impl.s"
 	@echo "... libs/src/glad.o"
 	@echo "... libs/src/glad.i"
 	@echo "... libs/src/glad.s"

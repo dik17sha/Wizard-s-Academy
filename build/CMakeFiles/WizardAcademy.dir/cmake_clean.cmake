@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o"
-  "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o.d"
   "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o"
   "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o.d"
   "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o"
@@ -9,8 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o.d"
   "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o"
   "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o.d"
-  "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o"
-  "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o.d"
+  "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o"
+  "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o.d"
   "CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o"
   "CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o.d"
   "WizardAcademy"

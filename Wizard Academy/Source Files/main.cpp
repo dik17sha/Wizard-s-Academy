@@ -3,72 +3,44 @@
 //
 //  Created by Diksha Chottani on 11/2/25.
 //Still running the test program
-//the traingle
-
 
 #include<iostream>
+#include <fstream>
+#include <vector>
+
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include"shader.h"
 #include"VAO.h"
 #include"VBO.h"
 #include"EBO.h"
+
+#include"Mesh.h"
 #include "Camera.h"
+#include "Model.h"
+#include"shader.h"
 
 //Window Settings
 const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 800;
 
 //Calling Camera object
-Camera camera(SCR_WIDTH, SCR_HEIGHT, glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = SCR_WIDTH/2.0f;
+float lastY = SCR_HEIGHT/2.0f;
+bool firstMouse = true;
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
 //Creating Function Prototypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-//void mouse_callback(GLFWwindow* window, double xPos, double yPos);
-//void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+void mouse_callback(GLFWwindow* window, double xPos, double yPos);
+void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
+void processInput(GLFWwindow *window);
 
-//Test
-// 8 vertices * (3 positions + 3 colors) = 48 floats
-
-GLfloat cube_vertices[] = {
-    //Positions                         //Colors(R,G,B)
-    -0.5f, -0.5f, -0.5f,                1.0f, 0.0f, 0.0f,  //Back Bottom Left
-    0.5f, -0.5f, -0.5f,                 1.0f, 0.0f, 0.0f,  //Back Bottom Right
-    0.5f, 0.5f, -0.5f,                  1.0f, 0.0f, 0.0f,  //Back Top Right
-    -0.5f, 0.5f, -0.5f,                 1.0f, 0.0f, 0.0f,  //Back Top Left
-    
-    -0.5f, 0.5f, 0.5f,                  0.0f, 1.0f, 0.0f,  //Front Bottom Left
-    0.5f, -0.5f, 0.5f,                  0.0f, 1.0f, 0.0f,  //Front Bottom Right
-    0.5f, 0.5f, 0.5f,                   0.0f, 1.0f, 0.0f,  //Front Top Right
-    -0.5f, 0.5f, 0.5f,                  0.0f, 1.0f, 0.0f   //Front Top Left
-    
-};
-
-//Indcies for the Cube (12 triangles * 3 indices = 36 indices)
-GLuint cubeIndices[] = {
-    //Back Face
-    0, 1, 2,
-    2, 3, 0,
-    //Front Face
-    4, 5, 6,
-    6, 7, 4,
-    //Right Face
-    1, 5, 6,
-    6, 2, 1,
-    //Left Face
-    0, 4, 7,
-    7, 3, 0,
-    //Top Face
-    3, 2, 6,
-    6, 7, 3,
-    //Bottom Face
-    0, 1, 5,
-    5, 4, 1
-};
 
 int main()
 {
@@ -96,9 +68,10 @@ int main()
     glfwMakeContextCurrent(window);
     
     //Setting callback functions for resizing and mouse input
+    glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    //glfwSetCursorPosCallback(window, mouse_callback);
-    //glfwSetScrollCallback(window, scroll_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
     
     //Locking cursor to the center of the screen
     glfwSetInputMode(window, GLFW_CURSOR,GLFW_CURSOR_DISABLED);
@@ -109,105 +82,117 @@ int main()
         std::cerr << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+    std::cout <<"OpenGl version: " << glGetString(GL_VERSION) << std::endl;
     
     // 3. Global OpenGL state
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    //stbi_set_flip_vertically_on_load(true);
+    
+    glEnable(GL_DEPTH_TEST); 
     
     // 4. Setup for the Cube Geometry using the classes
-    std::cout << "Setting up shader..." << std::endl;
-    Shader defaultShader("basic.vs", "basic.fs");
     
-    std::cout << "Setting up cube geometry..." << std::endl;
-    VAO cubeVAO;
-    cubeVAO.Bind();
+    //Setting up the shader
+    Shader defaultShader("shaders/basic.vert", "shaders/basic.frag");
     
-    VBO cubeVBO(cube_vertices, sizeof(cube_vertices));
-    EBO cubeEBO(cubeIndices, sizeof(cubeIndices));
-    
-    //Linking Position Attribute (layout 0)
-    cubeVAO.LinkVBO(cubeVBO, 0);
-    
-    //Linking color Attribute
-    cubeVAO.LinkVBO(cubeVBO, 1);
-    
-    //cubeVAO.LinkVBO(cubeVBO, 0, 3, GL_FLOAT, 6*sizeof(float),(void*)0);
-    //cubeVAO.LinkVBO(cubeVBO, 1, 3, GL_FLOAT, 6*sizeof(float),(void*)0);
-    
-    cubeVAO.Unbind();
-    cubeVBO.Unbind();
-    cubeEBO.Unbind();
-    
-    std::cout << "Starting render loop..." << std::endl;
-    int frame_count = 0;
-    
+    //Loading the model HEREEEEE
+    // Model castelModel("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/assets/Model/castle/Kasteel_De_Haar.obj");
+    Model castelModel("assets/Model/castle/de_haar_castle.obj");
+    //("assets/Model/statue/pbr_stylized_statue_-_mage__wizard.obj");
+
+    std::cout << "Model loaded successfully . Ready to enter." << std::endl;
+
     // 5. Main Render Loop
     while(!glfwWindowShouldClose(window))
     {
-        // 5.1 Input Processing
-        camera.Innputs(window);
-        
-        // 5.2 Clearing
-        glClearColor(0.01f, 0.01f, 0.05f, 1.0f);  //Helps me create the night sky
+        float currentFrame = static_cast<float>(glfwGetTime());
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
+        //input 
+        processInput(window);
+
+        //render
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        // 5.3 Drawing the Cube
-        defaultShader.Activate();
-        
-        //Calculate and uploading the MVP matrices -- HEREEEE
-        glm::mat4 model = glm::mat4(1.0f);
-        
-        //Rotation
-        model = glm::rotate(model, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+        defaultShader.use();
+
+        //Calculating the model matrix
+        glm::mat4 model = glm::mat4(
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.getViewMatrix();
-        glm::mat4 projection = camera.getProjectionMatrix();
         
         defaultShader.setMat4("model", model);
-        defaultShader.setMat4("view", view);
         defaultShader.setMat4("projection", projection);
-        
-        cubeVAO.Bind();
-        
-        //Drawing the cube using indicies
-        glDrawElements(GL_TRIANGLES, sizeof(cubeIndices) / sizeof(GLuint), GL_UNSIGNED_INT, 0);
-        
-        if (frame_count++ < 5 || frame_count % 100 == 0) {
-            std::cout << "Frame " << frame_count << ": drew " << (sizeof(cubeIndices) / sizeof(GLuint)) << " indices" << std::endl;
-        }
-        
-        // 5.4 Swap and Poll
+        defaultShader.setMat4("view", view);
+
+        // rendering the loaded model 
+        // glm::mat4 model = glm::mat4(1.0f);
+        // model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+        // model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+        // defaultShader.setMat4("model",model);
+    
+        //Drawing the loaded model
+        castelModel.Draw(defaultShader);
+
+        // 5.4 Swapping the buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
-        
+
     }
-        
-        // 6. Cleanup
-        cubeVAO.Delete();
-        cubeVBO.Delete();
-        cubeEBO.Delete();
-        defaultShader.Delete();
-        
-        glfwTerminate();
-        return 0;
-    
+
+    // 6. Cleanup
+
+    glfwTerminate();
+    return 0;
+
 }
 
-//Function Definations for Callback Functions
+void processInput(GLFWwindow *window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        camera.ProcessKeyboard(FORWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        camera.ProcessKeyboard(BACKWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        camera.ProcessKeyboard(LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        camera.ProcessKeyboard(RIGHT, deltaTime);
+}
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
-    camera.width = width;
-    camera.height = height;
 }
-/*
+
 void mouse_callback(GLFWwindow* window, double xPos, double yPos)
 {
-    //Passing empty function for now
+    float xpos = static_cast<float>(xPos);
+    float ypos = static_cast<float>(yPos);
+
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+    lastX = xpos;
+    lastY = ypos;
+
+    camera.ProcessMouseMovement(xoffset, yoffset);
 }
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 {
-    //Will use this function to add zoom in/out with the scroll wheel of mouse 
+    camera.ProcessMouseScroll(static_cast<float>(yOffset));
 }
-*/

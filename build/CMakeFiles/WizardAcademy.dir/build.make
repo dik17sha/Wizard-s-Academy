@@ -72,24 +72,10 @@ include CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/codegen:
 .PHONY : CMakeFiles/WizardAcademy.dir/codegen
 
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/Camera.cpp
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/Camera.cpp"
-
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/Camera.cpp" > CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.i
-
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/Camera.cpp" -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.s
-
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/EBO.cpp
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/EBO.cpp"
 
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.i: cmake_force
@@ -103,7 +89,7 @@ CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.s: cmake_force
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/VAO.cpp
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/VAO.cpp"
 
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.i: cmake_force
@@ -117,7 +103,7 @@ CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.s: cmake_force
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/VBO.cpp
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/VBO.cpp"
 
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.i: cmake_force
@@ -131,7 +117,7 @@ CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.s: cmake_force
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/main.cpp
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/main.cpp"
 
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.i: cmake_force
@@ -142,24 +128,24 @@ CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/main.cpp" -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.s
 
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/shader.cpp
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/shader.cpp"
+CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o: CMakeFiles/WizardAcademy.dir/flags.make
+CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/stb_image_impl.cpp
+CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp"
 
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/shader.cpp" > CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.i
+CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" > CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i
 
-CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/shader.cpp" -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.s
+CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s
 
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o: CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o: /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o -MF CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o.d -o CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o -c /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c
 
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.i: cmake_force
@@ -172,29 +158,27 @@ CMakeFiles/WizardAcademy.dir/libs/src/glad.c.s: cmake_force
 
 # Object files for target WizardAcademy
 WizardAcademy_OBJECTS = \
-"CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o" \
 "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o" \
 "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o" \
 "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o" \
 "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o" \
-"CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o" \
+"CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o" \
 "CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o"
 
 # External object files for target WizardAcademy
 WizardAcademy_EXTERNAL_OBJECTS =
 
-WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o
 WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o
 WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o
 WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o
 WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o
-WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o
+WizardAcademy: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o
 WizardAcademy: CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o
 WizardAcademy: CMakeFiles/WizardAcademy.dir/build.make
 WizardAcademy: /Users/dchottani/Desktop/Wizard-s-Academy/libs/lib/libglfw.3.dylib
 WizardAcademy: /Users/dchottani/Desktop/Wizard-s-Academy/libs/lib/libassimp.a
 WizardAcademy: CMakeFiles/WizardAcademy.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable WizardAcademy"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable WizardAcademy"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/WizardAcademy.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

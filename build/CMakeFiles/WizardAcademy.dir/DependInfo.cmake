@@ -9,12 +9,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c" "CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o" "gcc" "CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o.d"
-  "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/Camera.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/Camera.cpp.o.d"
   "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/EBO.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/EBO.cpp.o.d"
   "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/VAO.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VAO.cpp.o.d"
   "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/VBO.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/VBO.cpp.o.d"
   "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/main.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/main.cpp.o.d"
-  "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/shader.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/shader.cpp.o.d"
+  "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o" "gcc" "CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

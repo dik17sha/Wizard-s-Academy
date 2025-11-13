@@ -48,8 +48,12 @@ target_link_libraries(WizardAcademy PRIVATE ${GLFW_LIBRARY})
 
 # Link Assimp static library
 set(ASSIMP_LIBRARY "${CMAKE_SOURCE_DIR}/libs/lib/libassimp.a")
+#set(ASSIMP_LIBRARY "${CMAKE_SOURCE_DIR}/libs/include/assimp")
 message(STATUS "Using bundled Assimp: ${ASSIMP_LIBRARY}")
-target_link_libraries(WizardAcademy PRIVATE ${ASSIMP_LIBRARY})
+target_link_libraries(WizardAcademy PRIVATE 
+	${ASSIMP_LIBRARY}
+	z
+)
 
 # Add some useful compile flags for macOS to pick proper contexts
 if(APPLE)

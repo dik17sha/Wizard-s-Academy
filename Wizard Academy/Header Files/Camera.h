@@ -5,55 +5,129 @@
 //  Created by Diksha Chottani on 11/7/25.
 //
 
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include<glad/glad.h>
-#include<GLFW/glfw3.h>
 #include<glm/glm.hpp>
 #include<glm/gtc/matrix_transform.hpp>
-#include<glm/gtc/type_ptr.hpp>
-#include<glm/gtx/rotate_vector.hpp>
-#include<glm/gtx/vector_angle.hpp>
+
+enum Camera_Movement {
+    FORWARD,
+    BACKWARD,
+    LEFT,
+    RIGHT
+};
+
+//Default camera values
+const float YAW         = -90.0f;
+const float PITCH       =  0.0f;
+const float SPEED       =  2.5f;
+const float SENSITIVITY =  0.1f;
+const float ZOOM        =  45.0f;
 
 class Camera{
 public:
     
-    //Storing the initial position
+    //Camera Attributes
     glm::vec3 Position;
+    glm::vec3 Front;
+    glm::vec3 Up;
+    glm::vec3 Right;
+    glm::vec3 WorldUp;
+
+    //Euler Angles
+    float Yaw;
+    float Pitch;
+
+    //Camera Options
+    float MovementSpeed;
+    float MouseSensitivity;
+    float Zoom;
+
     
+    //Constructor with vectors
+    Camera(glm::vec3 postion = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+    {
+        Position = postion;
+        WorldUp = up;
+        Yaw = yaw;
+        Pitch = pitch;
+        updateCameraVectors();
+    }
     
-    //Storing the intial direction of the camera
-    glm::vec3 Orientation = glm::vec3(0.0f, 0.0f, -1.0f);
-    
-    
-    //Storing the up direction
-    glm::vec3 Up = glm::vec3(0.0f, 1.0f, 0.0f);
-    
-    
-    //Projection Properties
-    float FovDeg = 45.0f;
-    float nearPlane = 0.1f;
-    float farPlane = 100.0f;
-    
-    //Specifing Window Dimensions
-    int width;
-    int height;
-    
-    //Speed Settings
-    float speed = 0.5f;
-    float sensitivity = 100.0f;
-    
-    //Mouse State
-    bool firstClick = true;
-    
-    //Constructor
-    Camera(int width, int height, glm::vec3 position);
-    
+    //Constructor with scalar values
+    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+    {
+        Position = glm::vec3(posX, posY, posZ);
+        WorldUp = glm::vec3(upX, upY, upZ);
+        Yaw = yaw;
+        Pitch = pitch;
+        updateCameraVectors();
+    }   
+
     //For calculating te View Matrix
-    glm::mat4 getViewMatrix();
+    glm::mat4 getViewMatrix()
+    {
+        return glm::lookAt(Position, Position + Front, Up);
+    }
     
-    //For calculating the Projection Matrix
-    glm::mat4 getProjectionMatrix();
-    
-    //Function that will handle the user input
-    void Innputs(GLFWwindow* window);
-    
+    void ProcessKeyboard(Camera_Movement direction, float deltaTime)
+    {
+        float velocity = MovementSpeed * deltaTime;
+        if(direction == FORWARD)
+            Position += Front * velocity;
+        if(direction == BACKWARD)
+            Position -= Front * velocity;
+        if(direction == LEFT)
+            Position -= Right * velocity;
+        if(direction == RIGHT)
+            Position += Right * velocity;
+    }   
+
+    void ProcessMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
+    {
+        xOffset *= MouseSensitivity;
+        yOffset *= MouseSensitivity;
+
+        Yaw   += xOffset;
+        Pitch += yOffset;
+
+        //Making sure that when pitch is out of bounds, screen doesn't get flipped
+        if(constrainPitch)
+        {
+            if(Pitch > 89.0f)
+                Pitch = 89.0f;
+            if(Pitch < -89.0f)
+                Pitch = -89.0f;
+        }
+    }
+
+    void ProcessMouseScroll(float yOffset)
+    {
+        Zoom -= (float)yOffset;
+        if(Zoom < 1.0f)
+            Zoom = 1.0f;
+        if(Zoom > 45.0f)
+            Zoom = 45.0f;
+    }
+
+private:
+    //Calculating the front vector from the Camera's (updated) Euler Angles
+    void updateCameraVectors()
+    {
+        //Calculating the new Front vector
+        glm::vec3 front;
+        front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+        front.y = sin(glm::radians(Pitch));
+        front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+        Front = glm::normalize(front);
+        
+        //Also re-calculating the Right and Up vector
+        Right = glm::normalize(glm::cross(Front, WorldUp));  //Normalizing the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+        Up    = glm::normalize(glm::cross(Right, Front));
+    }
+
 };
+
+#endif
