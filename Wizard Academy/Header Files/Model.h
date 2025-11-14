@@ -45,6 +45,7 @@ class Model
     //My model will be loaded here
     Model(std::string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
+        std::cout << "The path i am using is: " << path << std::endl;
         loadModel(path);
     }
 
@@ -60,7 +61,12 @@ class Model
     void loadModel(std::string const &path)
     {
         Assimp::Importer importer;
+
+        std::cout << "reading the file now " << std::endl;
+        std::cout << "Trying to read:  "<< path << std::endl;
+        
         const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace );
+        std::cout << "scene was loaded here " << scene << std::endl;
 
         if(!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
@@ -69,6 +75,7 @@ class Model
         }
 
         directory = path.substr(0, path.find_last_of('/'));
+        std::cout << "the directory is: " << directory << std::endl;
 
         processNode(scene->mRootNode, scene);
 

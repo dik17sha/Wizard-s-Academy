@@ -66,7 +66,7 @@ public:
     }
     catch(std::ifstream::failure& e)
     {
-        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << "\nCheck file paths: " << vertexFile << "and" << fragmentFile << std::endl;
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << "\nCheck file paths: " << vertexFile << " and " << fragmentFile << std::endl;
     }
 
     const char* vertexSource = vertexCode.c_str();

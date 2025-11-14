@@ -28,7 +28,7 @@ const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 800;
 
 //Calling Camera object
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(5.0f, 5.0f, 70.0f));
 float lastX = SCR_WIDTH/2.0f;
 float lastY = SCR_HEIGHT/2.0f;
 bool firstMouse = true;
@@ -57,7 +57,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
     // 2. Creating the Window and Glad loading
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Wizard's Academy Test", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Wizard's Academy", NULL, NULL);
     if (window == NULL)
     {
         std::cerr << "Failed to create GLFW window" << std::endl;
@@ -92,14 +92,15 @@ int main()
     // 4. Setup for the Cube Geometry using the classes
     
     //Setting up the shader
-    Shader defaultShader("shaders/basic.vert", "shaders/basic.frag");
+    Shader defaultShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/basic.vert", "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/basic.frag");
     
     //Loading the model HEREEEEE
-    // Model castelModel("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/assets/Model/castle/Kasteel_De_Haar.obj");
-    Model castelModel("assets/Model/castle/de_haar_castle.obj");
+    //Model castelModel("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/assets/Model/castle/Kasteel_De_Haar.obj");
+    //Model castelModel("Wizard Academy/assets/Model/backpack/backpack.obj");
+    Model castelModel("Wizard Academy/assets/Model/castle/de_haar_castle.obj");
     //("assets/Model/statue/pbr_stylized_statue_-_mage__wizard.obj");
 
-    std::cout << "Model loaded successfully . Ready to enter." << std::endl;
+    std::cout << "Model loaded successfully. Ready to enter." << std::endl;
 
     // 5. Main Render Loop
     while(!glfwWindowShouldClose(window))
@@ -123,7 +124,7 @@ int main()
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f);
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100000.0f);
         glm::mat4 view = camera.getViewMatrix();
         
         defaultShader.setMat4("model", model);
