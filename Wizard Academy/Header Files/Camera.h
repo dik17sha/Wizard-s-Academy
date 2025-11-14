@@ -16,7 +16,9 @@ enum Camera_Movement {
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DOWN
 };
 
 //Default camera values
@@ -34,6 +36,7 @@ public:
     glm::vec3 Front;
     glm::vec3 Up;
     glm::vec3 Right;
+    glm::vec3 Down;
     glm::vec3 WorldUp;
 
     //Euler Angles
@@ -41,7 +44,7 @@ public:
     float Pitch;
 
     //Camera Options
-    float MovementSpeed;
+    float MovementSpeed = 75.0f; 
     float MouseSensitivity;
     float Zoom;
 
@@ -83,6 +86,10 @@ public:
             Position -= Right * velocity;
         if(direction == RIGHT)
             Position += Right * velocity;
+        if(direction == UP)
+            Position += Up * velocity;
+        if(direction == DOWN)
+            Position -= Down * velocity;
     }   
 
     void ProcessMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)

@@ -28,7 +28,7 @@ const unsigned int SCR_WIDTH = 1200;
 const unsigned int SCR_HEIGHT = 800;
 
 //Calling Camera object
-Camera camera(glm::vec3(5.0f, 5.0f, 70.0f));
+Camera camera(glm::vec3(15.0f, 15.0f, 70.0f));
 float lastX = SCR_WIDTH/2.0f;
 float lastY = SCR_HEIGHT/2.0f;
 bool firstMouse = true;
@@ -44,6 +44,7 @@ void processInput(GLFWwindow *window);
 
 int main()
 {
+
     // 1. Initializing GLFW
     if(!glfwInit()){
         std::cerr << "Failed to initialize GLFW" << std ::endl;
@@ -65,7 +66,6 @@ int main()
         return -1;
     }
     
-    glfwMakeContextCurrent(window);
     
     //Setting callback functions for resizing and mouse input
     glfwMakeContextCurrent(window);
@@ -74,7 +74,7 @@ int main()
     glfwSetScrollCallback(window, scroll_callback);
     
     //Locking cursor to the center of the screen
-    glfwSetInputMode(window, GLFW_CURSOR,GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION,GLFW_TRUE);
     
     //Loading GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -95,10 +95,11 @@ int main()
     Shader defaultShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/basic.vert", "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/basic.frag");
     
     //Loading the model HEREEEEE
-    //Model castelModel("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/assets/Model/castle/Kasteel_De_Haar.obj");
-    //Model castelModel("Wizard Academy/assets/Model/backpack/backpack.obj");
+
     Model castelModel("Wizard Academy/assets/Model/castle/de_haar_castle.obj");
-    //("assets/Model/statue/pbr_stylized_statue_-_mage__wizard.obj");
+    Model wizardModel("Wizard Academy/assets/Model/wizard/elf_wizard.obj");
+    Model leaveModel("Wizard Academy/assets/Model/leaves/falling_leaves.obj");
+
 
     std::cout << "Model loaded successfully. Ready to enter." << std::endl;
 
@@ -112,33 +113,59 @@ int main()
         //input 
         processInput(window);
 
+
         //render
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         defaultShader.use();
 
-        //Calculating the model matrix
-        glm::mat4 model = glm::mat4(
+        
+        
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100000.0f);
+        glm::mat4 view = camera.getViewMatrix();
+
+        
+        defaultShader.setMat4("projection", projection);
+        defaultShader.setMat4("view", view);
+
+        // CASTLE FOR THE COURTYARD
+        glm::mat4 castelMatrix = glm::mat4(
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f);
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100000.0f);
-        glm::mat4 view = camera.getViewMatrix();
-        
-        defaultShader.setMat4("model", model);
-        defaultShader.setMat4("projection", projection);
-        defaultShader.setMat4("view", view);
 
-        // rendering the loaded model 
-        // glm::mat4 model = glm::mat4(1.0f);
-        // model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-        // model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-        // defaultShader.setMat4("model",model);
-    
-        //Drawing the loaded model
+        castelMatrix = glm::translate(castelMatrix, glm::vec3(0.0f,0.0f,0.0f));
+
+        castelMatrix = glm::scale(castelMatrix, glm::vec3(1.0f));
+
+        defaultShader.setMat4("model", castelMatrix);
         castelModel.Draw(defaultShader);
+
+        // WIZARD //
+        float wizardRotation = 30.0f; 
+        wizardRotation += deltaTime * 30.0f;
+        if(wizardRotation > 360.0f)
+            wizardRotation -= 360.0f;
+
+        glm::mat4 wizardMatrix = glm::mat4(1.0f);
+
+        wizardMatrix = glm::translate(wizardMatrix, glm::vec3(-50.0f, 10.0f, 5.0f));
+        wizardMatrix = glm::rotate(wizardMatrix, glm::radians(wizardRotation), glm::vec3(0.0f, 1.0f, 0.0f));
+        wizardMatrix = glm::scale(wizardMatrix, glm::vec3(15.0f));
+
+        defaultShader.setMat4("model", wizardMatrix);
+        wizardModel.Draw(defaultShader);
+
+        //LEAVES
+        glm::mat4 leavesMatrix = glm::mat4(1.0f);
+
+        leavesMatrix = glm::translate(leavesMatrix, glm::vec3(-50.0f, 10.0f, 5.0f));
+        leavesMatrix = glm::scale(leavesMatrix, glm::vec3(10.0f));
+
+        defaultShader.setMat4("model", leavesMatrix);
+        leaveModel.Draw(defaultShader);
 
         // 5.4 Swapping the buffers
         glfwSwapBuffers(window);
@@ -166,6 +193,12 @@ void processInput(GLFWwindow *window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    if(glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+        camera.ProcessKeyboard(UP, deltaTime);
+    if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+        camera.ProcessKeyboard(DOWN, deltaTime);
+
+
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -190,6 +223,9 @@ void mouse_callback(GLFWwindow* window, double xPos, double yPos)
 
     lastX = xpos;
     lastY = ypos;
+
+    xoffset += 0.2f;
+    yoffset += 0.2f;
 
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
