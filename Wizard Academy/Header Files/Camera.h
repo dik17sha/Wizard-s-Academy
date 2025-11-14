@@ -18,13 +18,14 @@ enum Camera_Movement {
     LEFT,
     RIGHT,
     UP,
-    DOWN
+    DOWN,
+    YAWRIGHT
 };
 
 //Default camera values
 const float YAW         = -90.0f;
 const float PITCH       =  0.0f;
-const float SPEED       =  2.5f;
+const float SPEED       =  50.0f;
 const float SENSITIVITY =  0.1f;
 const float ZOOM        =  45.0f;
 
@@ -38,13 +39,14 @@ public:
     glm::vec3 Right;
     glm::vec3 Down;
     glm::vec3 WorldUp;
+    glm::vec3 yawRight;
 
     //Euler Angles
     float Yaw;
     float Pitch;
 
     //Camera Options
-    float MovementSpeed = 75.0f; 
+    float MovementSpeed;
     float MouseSensitivity;
     float Zoom;
 
@@ -90,6 +92,7 @@ public:
             Position += Up * velocity;
         if(direction == DOWN)
             Position -= Down * velocity;
+    
     }   
 
     void ProcessMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true)
@@ -108,6 +111,8 @@ public:
             if(Pitch < -89.0f)
                 Pitch = -89.0f;
         }
+
+        updateCameraVectors();
     }
 
     void ProcessMouseScroll(float yOffset)
