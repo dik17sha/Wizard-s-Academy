@@ -53,6 +53,26 @@ void DrawLeafSwirl(
     float phasePerLeaf = 0.4f
 );
 
+float skyboxVertices[] = 
+{
+    -1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,  1.0f, -1.0f,
+
+    -1.0f, -1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f, -1.0f,  1.0f,  1.0f, -1.0f, -1.0f,  1.0f,
+
+    1.0f, -1.0f, -1.0f, 1.0f, -1.0f,  1.0f, 1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f, 1.0f,  1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
+
+    -1.0f, -1.0f,  1.0f, -1.0f,  1.0f,  1.0f, 1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f, 1.0f, -1.0f,  1.0f, -1.0f, -1.0f,  1.0f,
+
+    -1.0f,  1.0f, -1.0f, 1.0f,  1.0f, -1.0f, 1.0f,  1.0f,  1.0f,
+    1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f, -1.0f,
+
+    -1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f, -1.0f,
+    1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f,  1.0f
+};
 
 int main()
 {
@@ -106,18 +126,48 @@ int main()
     //Setting up the shader
     Shader defaultShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/basic.vert", "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/basic.frag");
     
+
+    //Setting up the skybox shaders
+    Shader skyboxShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/skybox.vert", "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/skybox.frag");
+    
+    //Linking the poition attributes
+
+
     //Loading the model HEREEEEE
 
     Model castelModel("Wizard Academy/assets/Model/castle/de_haar_castle.obj");
-    Model wizardModel("Wizard Academy/assets/Model/wizard/elf_wizard.obj");
-    Model leaveModel("Wizard Academy/assets/Model/leaves/birch_leaf.obj");
+    //Model wizardModel("Wizard Academy/assets/Model/wizard/elf_wizard.obj");
+    //Model leaveModel("Wizard Academy/assets/Model/leaves/birch_leaf.obj");
+    Model skyboxModel("Wizard Academy/assets/Model/skybox/free_skybox_fantasy_lands_cloudy_space.obj");
+    Model statueModel("Wizard Academy/assets/Model/statue/pbr_stylized_statue_-_mage__wizard.obj");
+    Model headWizardModel("Wizard Academy/assets/Model/headWizard/dumbledore.obj");
 
+    //student wizard models 
+    Model wizard1Model("Wizard Academy/assets/Model/wizard1/draco_malfoy_cos_ps2.obj");
+    Model wizard2Model("Wizard Academy/assets/Model/wizard2/harry_potter_cos_ps2.obj");
+    Model wizard3Model("Wizard Academy/assets/Model/wizard3/hermione_granger_cos_gamecubexbox.obj");
+    Model wizard4Model("Wizard Academy/assets/Model/wizard4/ron_weasley_cos_ps2.obj");
+
+    struct Student {
+        Model* model;
+        glm::vec3 offset;
+        float scale;
+        float y_adjustment; 
+    };
+
+    std::vector<Student> students = {
+        {&wizard1Model, glm::vec3(-49.0f, 11.0f, 0.0f), 2.0f, -10.0f},
+        {&wizard2Model, glm::vec3(-60.0f, 11.0f, 0.0f), 2.0f, 0.0f},
+        {&wizard3Model, glm::vec3(-49.0f, 10.0f, 0.0f), 2.0f, 0.0f},
+        {&wizard4Model, glm::vec3(-10.0f, 0.0f, 15.0f), 0.01f, 0.0f}
+    };
 
     std::cout << "Model loaded successfully. Ready to enter." << std::endl;
 
     // 5. Main Render Loop
     while(!glfwWindowShouldClose(window))
     {
+
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -129,24 +179,31 @@ int main()
         //render
         glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        defaultShader.use();
-
         
-        
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100000.0f);
+        //Skybox model 
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom),(float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
         glm::mat4 view = camera.getViewMatrix();
-
         
+        skyboxShader.use();
+
+
+        glm::mat4 skyboxMatrix = glm::mat4(1.0f);
+        skyboxMatrix = glm::scale(skyboxMatrix, glm::vec3(500.0f));
+
+        skyboxShader.setMat4("projection", projection);
+        skyboxShader.setMat4("view", camera.getViewMatrix());
+        skyboxShader.setMat4("model", skyboxMatrix);
+        glDepthFunc(GL_LEQUAL);
+        skyboxModel.Draw(skyboxShader);
+        glDepthFunc(GL_LESS);
+
+        //Other shaders to load othe models 
+        defaultShader.use();
         defaultShader.setMat4("projection", projection);
         defaultShader.setMat4("view", view);
 
         // CASTLE FOR THE COURTYARD
-        glm::mat4 castelMatrix = glm::mat4(
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f);
+        glm::mat4 castelMatrix = glm::mat4(1.0f);
 
         castelMatrix = glm::translate(castelMatrix, glm::vec3(0.0f,0.0f,0.0f));
 
@@ -156,7 +213,7 @@ int main()
         castelModel.Draw(defaultShader);
 
         // WIZARD //
-
+        /*
         //rotation to face towards the screen
         float wizardRotation = 30.0f; 
         wizardRotation += deltaTime * 30.0f;
@@ -204,10 +261,110 @@ int main()
         // Send to shader + draw
         defaultShader.setMat4("model", wizardMatrix);
         wizardModel.Draw(defaultShader);
-
+        
 
         DrawLeafSwirl(defaultShader, leaveModel, wizardMatrix, currentFrame);
+        */
 
+        //Loading the statue
+        glm::mat4 statueMatrix = glm::mat4(1.0f);
+        statueMatrix = glm::translate(statueMatrix, glm::vec3(-45.5f, 17.5f, 0.0f));
+        statueMatrix = glm::rotate(statueMatrix,glm::radians(-90.0f), glm::vec3(0,1,0));
+        statueMatrix = glm::scale(statueMatrix, glm::vec3(3.0f));
+
+        defaultShader.setMat4("model",statueMatrix);
+        statueModel.Draw(defaultShader);
+
+        // Loading the head wizard
+        glm::mat4 headWizardMatrix = glm::mat4(1.0f);
+        headWizardMatrix = glm::translate(headWizardMatrix,glm::vec3(-53.0f, 10.0f, 0.0f));
+        headWizardMatrix = glm::rotate(headWizardMatrix, glm::radians(-90.0f), glm::vec3(0,1,0));
+        headWizardMatrix = glm::scale(headWizardMatrix, glm::vec3(4.0f));
+
+        defaultShader.setMat4("model", headWizardMatrix);
+        headWizardModel.Draw(defaultShader);
+
+        //Loading the student wizards
+        //wizard 1 
+        
+        glm::mat4 wizard1Matrix = glm::mat4(1.0f);
+        wizard1Matrix = glm::translate(wizard1Matrix, glm::vec3(-64.0f, 10.0f, 5.0f));
+        wizard1Matrix = glm::rotate(wizard1Matrix, glm::radians(-90.0f), glm::vec3(1,0,0));
+        wizard1Matrix = glm::rotate(wizard1Matrix, glm::radians(110.0f), glm::vec3(0,0,1));
+        wizard1Matrix = glm::scale(wizard1Matrix,glm::vec3(4.0f));
+
+        defaultShader.setMat4("model",wizard1Matrix);
+        wizard1Model.Draw(defaultShader);
+        
+
+        //wizard 2
+        glm::mat4 wizard2Matrix = glm::mat4(1.0f);
+        wizard2Matrix = glm::translate(wizard2Matrix, glm::vec3(-59.0f, 10.0f, 13.0f));
+        wizard2Matrix = glm::rotate(wizard2Matrix, glm::radians(-90.0f), glm::vec3(1,0,0));
+        wizard2Matrix = glm::rotate(wizard2Matrix, glm::radians(150.0f), glm::vec3(0,0,1));
+        wizard2Matrix = glm::scale(wizard2Matrix, glm::vec3(4.0f));
+
+        defaultShader.setMat4("model", wizard2Matrix);
+        wizard2Model.Draw(defaultShader);
+
+        //wizard 3 
+        glm::mat4 wizard3Matrix = glm::mat4(1.0f);
+        wizard3Matrix = glm::translate(wizard3Matrix, glm::vec3(-64.0f, 10.0f, -5.0f));
+        wizard3Matrix = glm::rotate(wizard3Matrix, glm::radians(60.0f), glm::vec3(0,1,0));
+        wizard3Matrix = glm::scale(wizard3Matrix, glm::vec3(4.0f));
+
+        defaultShader.setMat4("model", wizard3Matrix);
+        wizard3Model.Draw(defaultShader);
+
+        //wizard 4
+        //This is the bigger model 
+        glm::mat4 wizard4Matrix = glm::mat4(1.0f);
+        wizard4Matrix = glm::translate(wizard4Matrix,glm::vec3(-59.0f, 10.0f, -13.0f));
+        wizard4Matrix = glm::rotate(wizard4Matrix, glm::radians(-90.0f), glm::vec3(1,0,0));
+        wizard4Matrix = glm::rotate(wizard4Matrix, glm::radians(30.0f), glm::vec3(0,0,1));
+        wizard4Matrix = glm::scale(wizard4Matrix, glm::vec3(4.0f));
+
+        defaultShader.setMat4("model", wizard4Matrix);
+        wizard4Model.Draw(defaultShader);
+
+
+        //const glm::vec3 classCenter = glm::vec3(-45.5f, 11.0f, 0.0f);
+        //const float groundLevel = 11.0f;
+/*
+        for (size_t i = 0; i <students.size(); ++i)
+        {
+            Model* currentModel = students[i].model;
+            glm::vec3 relativeOffset = students[i].offset;
+            float currentScale = students[i].scale;
+            float y_adjust = students[i].y_adjustment;
+            
+           // glm::vec3 worldPos = classCenter + relativeOffset;
+            //worldPos.y = groundLevel + y_adjust;
+            
+            glm::mat4 studentMatrix = glm::mat4(1.0f);
+
+            studentMatrix = glm::scale(studentMatrix, glm::vec3(currentScale));
+
+            if( i == 0)
+            {
+                studentMatrix = glm::rotate(studentMatrix, glm::radians(90.0f), glm::vec3(0,1,0));
+            }
+
+            glm::vec3 directionToCenter = classCenter - worldPos;
+            float yawAngle = atan2(directionToCenter.x, directionToCenter.z);
+            yawAngle += glm::radians(90.0f);
+
+            studentMatrix = glm::rotate(studentMatrix, yawAngle, glm::vec3(0,1,0));
+
+            studentMatrix = glm::translate(studentMatrix, worldPos);
+
+            defaultShader.setMat4("model", studentMatrix);
+            currentModel->Draw(defaultShader);
+
+            std::cout << "Student model successfully loaded. " << i << std::endl;
+
+        }
+*/
         // 5.4 Swapping the buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
