@@ -52,28 +52,7 @@ void DrawLeafSwirl(
     float orbitSpeed = 2.0f,
     float phasePerLeaf = 0.4f
 );
-/*
-float skyboxVertices[] = 
-{
-    -1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f, 1.0f,  1.0f, -1.0f, -1.0f,  1.0f, -1.0f,
 
-    -1.0f, -1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f, -1.0f,  1.0f,  1.0f, -1.0f, -1.0f,  1.0f,
-
-    1.0f, -1.0f, -1.0f, 1.0f, -1.0f,  1.0f, 1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f, 1.0f,  1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
-
-    -1.0f, -1.0f,  1.0f, -1.0f,  1.0f,  1.0f, 1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f, 1.0f, -1.0f,  1.0f, -1.0f, -1.0f,  1.0f,
-
-    -1.0f,  1.0f, -1.0f, 1.0f,  1.0f, -1.0f, 1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f, -1.0f,
-
-    -1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f,  1.0f
-};
-*/
 
 int main()
 {
@@ -146,20 +125,6 @@ int main()
     Model wizard3Model("Wizard Academy/assets/Model/wizard3/hermione_granger_cos_gamecubexbox.obj");
     Model wizard4Model("Wizard Academy/assets/Model/wizard4/ron_weasley_cos_ps2.obj");
 
-    struct Student {
-        Model* model;
-        glm::vec3 offset;
-        float scale;
-        float y_adjustment; 
-    };
-
-    std::vector<Student> students = {
-        {&wizard1Model, glm::vec3(-49.0f, 11.0f, 0.0f), 2.0f, -10.0f},
-        {&wizard2Model, glm::vec3(-60.0f, 11.0f, 0.0f), 2.0f, 0.0f},
-        {&wizard3Model, glm::vec3(-49.0f, 10.0f, 0.0f), 2.0f, 0.0f},
-        {&wizard4Model, glm::vec3(-10.0f, 0.0f, 15.0f), 0.01f, 0.0f}
-    };
-
     std::cout << "Model loaded successfully. Ready to enter." << std::endl;
 
     // 5. Main Render Loop
@@ -199,6 +164,14 @@ int main()
         defaultShader.use();
         defaultShader.setMat4("projection", projection);
         defaultShader.setMat4("view", view);
+
+        glm::vec3 lightDir = glm::vec3(0.5f, -1.0f, -0.5f);
+        glm::vec3 lightColor = glm::vec3(3.0f, 3.0f, 2.7f);
+
+        defaultShader.setVec3("LightDirection", lightDir);
+        defaultShader.setVec3("lightColor", lightColor);
+        defaultShader.setVec3("viewPos", camera.Position);
+        defaultShader.setFloat("shininess", 32.0f);
 
         // CASTLE FOR THE COURTYARD
         glm::mat4 castelMatrix = glm::mat4(1.0f);
