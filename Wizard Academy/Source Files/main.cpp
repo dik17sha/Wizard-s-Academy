@@ -212,60 +212,6 @@ int main()
         defaultShader.setMat4("model", castelMatrix);
         castelModel.Draw(defaultShader);
 
-        // WIZARD //
-        /*
-        //rotation to face towards the screen
-        float wizardRotation = 30.0f; 
-        wizardRotation += deltaTime * 30.0f;
-        if(wizardRotation > 360.0f)
-            wizardRotation -= 360.0f;
-
-        //wizard rising after some seconds
-        float hoverStartTime = 5.0f;
-        float wizardHeight = 10.0f;
-        if(currentFrame > hoverStartTime)
-        {
-            wizardHeight += sin((currentFrame - hoverStartTime) * 2.0f) * 5.0f;
-
-        }
-
-        // --- WIZARD TRANSFORMATION ---
-
-        float wizardFloatDelay = 4.0f;       // delay before floating starts
-        float wizardBaseHeight = 20.0f;      // initial Y height
-        float wizardFloatAmplitude = 6.0f;   // how high/low he floats
-        float wizardFloatSpeed = 2.0f;       // floating speed
-
-        // Rotate wizard continuously
-        wizardRotation = currentFrame * 30.0f;   // rotates 30 deg per second
-
-        // Start floating only after delay
-        float wizardY = wizardBaseHeight;
-        if (currentFrame > wizardFloatDelay)
-        {
-            float t = currentFrame - wizardFloatDelay;
-            wizardY += sin(t * wizardFloatSpeed) * wizardFloatAmplitude;
-        }
-
-        glm::mat4 wizardMatrix = glm::mat4(1.0f);
-
-        // Move wizard to world position
-        wizardMatrix = glm::translate(wizardMatrix, glm::vec3(-50.0f, wizardY, 5.0f));
-
-        // Rotate around Y axis (to face camera)
-        wizardMatrix = glm::rotate(wizardMatrix, glm::radians(wizardRotation), glm::vec3(0,1,0));
-
-        // Scale him
-        wizardMatrix = glm::scale(wizardMatrix, glm::vec3(15.0f));
-
-        // Send to shader + draw
-        defaultShader.setMat4("model", wizardMatrix);
-        wizardModel.Draw(defaultShader);
-        
-
-        DrawLeafSwirl(defaultShader, leaveModel, wizardMatrix, currentFrame);
-        */
-
         //Loading the statue
         glm::mat4 statueMatrix = glm::mat4(1.0f);
         statueMatrix = glm::translate(statueMatrix, glm::vec3(-45.5f, 17.5f, 0.0f));
@@ -327,44 +273,6 @@ int main()
         defaultShader.setMat4("model", wizard4Matrix);
         wizard4Model.Draw(defaultShader);
 
-
-        //const glm::vec3 classCenter = glm::vec3(-45.5f, 11.0f, 0.0f);
-        //const float groundLevel = 11.0f;
-/*
-        for (size_t i = 0; i <students.size(); ++i)
-        {
-            Model* currentModel = students[i].model;
-            glm::vec3 relativeOffset = students[i].offset;
-            float currentScale = students[i].scale;
-            float y_adjust = students[i].y_adjustment;
-            
-           // glm::vec3 worldPos = classCenter + relativeOffset;
-            //worldPos.y = groundLevel + y_adjust;
-            
-            glm::mat4 studentMatrix = glm::mat4(1.0f);
-
-            studentMatrix = glm::scale(studentMatrix, glm::vec3(currentScale));
-
-            if( i == 0)
-            {
-                studentMatrix = glm::rotate(studentMatrix, glm::radians(90.0f), glm::vec3(0,1,0));
-            }
-
-            glm::vec3 directionToCenter = classCenter - worldPos;
-            float yawAngle = atan2(directionToCenter.x, directionToCenter.z);
-            yawAngle += glm::radians(90.0f);
-
-            studentMatrix = glm::rotate(studentMatrix, yawAngle, glm::vec3(0,1,0));
-
-            studentMatrix = glm::translate(studentMatrix, worldPos);
-
-            defaultShader.setMat4("model", studentMatrix);
-            currentModel->Draw(defaultShader);
-
-            std::cout << "Student model successfully loaded. " << i << std::endl;
-
-        }
-*/
         // 5.4 Swapping the buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
