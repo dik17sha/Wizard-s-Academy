@@ -52,7 +52,7 @@ void DrawLeafSwirl(
     float orbitSpeed = 2.0f,
     float phasePerLeaf = 0.4f
 );
-
+/*
 float skyboxVertices[] = 
 {
     -1.0f,  1.0f, -1.0f, -1.0f, -1.0f, -1.0f, 1.0f, -1.0f, -1.0f,
@@ -73,6 +73,7 @@ float skyboxVertices[] =
     -1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f, -1.0f,
     1.0f, -1.0f, -1.0f, -1.0f, -1.0f,  1.0f, 1.0f, -1.0f,  1.0f
 };
+*/
 
 int main()
 {
@@ -117,7 +118,6 @@ int main()
     std::cout <<"OpenGl version: " << glGetString(GL_VERSION) << std::endl;
     
     // 3. Global OpenGL state
-    //stbi_set_flip_vertically_on_load(true);
     
     glEnable(GL_DEPTH_TEST); 
     
@@ -129,8 +129,6 @@ int main()
 
     //Setting up the skybox shaders
     Shader skyboxShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/skybox.vert", "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/skybox.frag");
-    
-    //Linking the poition attributes
 
 
     //Loading the model HEREEEEE
@@ -346,51 +344,3 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
     camera.ProcessMouseScroll(static_cast<float>(yOffset));
 }
 
-void DrawLeafSwirl(
-    Shader &shader,
-    Model &leafModel,
-    const glm::mat4 &parentModel,
-    float time,
-    int numLeaves,
-    float radius,        // fixed radius (independent of wizard scale)
-    float verticalAmp,
-    float verticalSpeed,
-    float orbitSpeed,
-    float phasePerLeaf
-)
-{
-    // Extract world-space parent position (UNSCALED)
-    glm::vec3 parentPos = glm::vec3(
-        parentModel[3].x,
-        parentModel[3].y,
-        parentModel[3].z
-    );
-
-    // Extract parent's rotation ONLY (ignore scale)
-    glm::mat3 parentRot = glm::mat3(glm::normalize(glm::vec3(parentModel[0])),
-                                    glm::normalize(glm::vec3(parentModel[1])),
-                                    glm::normalize(glm::vec3(parentModel[2])));
-
-    glm::vec3 right   = parentRot[0];
-    glm::vec3 up      = parentRot[1];
-    glm::vec3 forward = parentRot[2];
-
-    for(int i = 0; i < numLeaves; i++)
-    {
-        float angle = time * orbitSpeed + i * phasePerLeaf;
-
-        glm::vec3 offset =
-            right   * (radius * cos(angle)) +
-            forward * (radius * sin(angle)) +
-            up      * (verticalAmp * sin(time * verticalSpeed + i * 0.3f));
-
-        glm::vec3 pos = parentPos + offset;
-
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, pos);
-        model = glm::scale(model, glm::vec3(30.0f)); // stable small leaf size
-
-        shader.setMat4("model", model);
-        leafModel.Draw(shader);
-    }
-}
