@@ -7,6 +7,7 @@
 #include<iostream>
 #include <fstream>
 #include <vector>
+#include<algorithm>
 
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
@@ -35,25 +36,88 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-//Creating Function Prototypes
+
+class SimpleParticle {
+public:
+    unsigned int VAO, VBO;
+    
+    SimpleParticle() {
+        // Create a simple quad with texture coordinates
+        float vertices[] = {
+            // positions     // texcoords
+            -0.5f, -0.5f,    0.0f, 0.0f,
+            0.5f, -0.5f,    1.0f, 0.0f,
+            0.5f,  0.5f,    1.0f, 1.0f,
+            -0.5f, -0.5f,    0.0f, 0.0f,
+            0.5f,  0.5f,    1.0f, 1.0f,
+            -0.5f,  0.5f,    0.0f, 1.0f
+        };
+        
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glBindVertexArray(VAO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        
+        // Position attribute (2D quad position)
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+        
+        // Texture coordinate attribute
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+        
+        glBindVertexArray(0);
+    }
+    
+    void Draw() {
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glBindVertexArray(0);
+    }
+    
+    ~SimpleParticle() {
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+    }
+};
+
+//Function Prototypes
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xPos, double yPos);
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset);
 void processInput(GLFWwindow *window);
-void DrawLeafSwirl(
+
+void DrawParticleSpell(
     Shader &shader,
-    Model &leafModel,
+    Model &particleModel,
     const glm::mat4 &parentModel,
     float time,
-    int numLeaves = 70,
+    int numLeaves = 90,
     float radius = 4.0f,
     float verticalAmp = 2.0f,
-    float verticalSpeed = 2.0f,
-    float orbitSpeed = 2.0f,
+    float verticalSpeed = 5.0f,
+    float orbitSpeed = 5.0f,
     float phasePerLeaf = 0.4f
 );
 
 
+void DrawSimpleParticleSpell(
+    Shader &shader,
+    SimpleParticle &particle,
+    const glm::mat4 &parentModel,
+    const glm::vec3 &cameraPos,
+    const glm::vec3 &cameraRight,
+    const glm::vec3 &cameraUp,
+    float time,
+    int numParticles = 90,
+    float radius = 4.0f,
+    float verticalAmp = 2.0f,
+    float verticalSpeed = 5.0f,
+    float orbitSpeed = 5.0f,
+    float phasePerParticle = 0.4f,
+    glm::vec3 color = glm::vec3(1.0f, 0.9f, 0.3f)
+);
 int main()
 {
 
@@ -99,6 +163,8 @@ int main()
     // 3. Global OpenGL state
     
     glEnable(GL_DEPTH_TEST); 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     
     // 4. Setup for the Cube Geometry using the classes
     
@@ -109,15 +175,16 @@ int main()
     //Setting up the skybox shaders
     Shader skyboxShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/skybox.vert", "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/skybox.frag");
 
+    //the particle shaders
+    Shader particleShader("/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/particle.vert","/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/shaders/particle.frag");
 
     //Loading the model HEREEEEE
 
     Model castelModel("Wizard Academy/assets/Model/castle/de_haar_castle.obj");
-    //Model wizardModel("Wizard Academy/assets/Model/wizard/elf_wizard.obj");
-    //Model leaveModel("Wizard Academy/assets/Model/leaves/birch_leaf.obj");
     Model skyboxModel("Wizard Academy/assets/Model/skybox/free_skybox_fantasy_lands_cloudy_space.obj");
     Model statueModel("Wizard Academy/assets/Model/statue/pbr_stylized_statue_-_mage__wizard.obj");
     Model headWizardModel("Wizard Academy/assets/Model/headWizard/dumbledore.obj");
+    Model particleModel("Wizard Academy/assets/Model/particle/uttm_glow.obj");
 
     //student wizard models 
     Model wizard1Model("Wizard Academy/assets/Model/wizard1/draco_malfoy_cos_ps2.obj");
@@ -126,6 +193,9 @@ int main()
     Model wizard4Model("Wizard Academy/assets/Model/wizard4/ron_weasley_cos_ps2.obj");
 
     std::cout << "Model loaded successfully. Ready to enter." << std::endl;
+
+    SimpleParticle simpleParticle;
+    std::cout << "Particle system initialized!" << std::endl;
 
     // 5. Main Render Loop
     while(!glfwWindowShouldClose(window))
@@ -165,13 +235,68 @@ int main()
         defaultShader.setMat4("projection", projection);
         defaultShader.setMat4("view", view);
 
-        glm::vec3 lightDir = glm::vec3(0.5f, -1.0f, -0.5f);
-        glm::vec3 lightColor = glm::vec3(3.0f, 3.0f, 2.7f);
+        float cycleSpeed = 0.1f; 
+        float timeOfDay = sin(currentFrame * 0.05f) * 0.5f + 0.5f;
 
-        defaultShader.setVec3("LightDirection", lightDir);
+        glm::vec3 dayColor = glm::vec3(1.3f, 1.25f, 1.1f);
+        glm::vec3 nightColor = glm::vec3(0.2f, 0.3f, 0.5f);
+        glm::vec3 sunsetColor = glm::vec3(1.5f, 0.6f, 0.3f);
+
+        glm::vec3 lightColor;
+        if (timeOfDay < 0.3f) {
+            // Night to sunrise
+            float t = timeOfDay / 0.3f;
+            lightColor = glm::mix(nightColor, sunsetColor, t);
+        } else if (timeOfDay < 0.5f) {
+            // Sunrise to day
+            float t = (timeOfDay - 0.3f) / 0.2f;
+            lightColor = glm::mix(sunsetColor, dayColor, t);
+        } else if (timeOfDay < 0.7f) {
+            // Day to sunset
+            float t = (timeOfDay - 0.5f) / 0.2f;
+            lightColor = glm::mix(dayColor, sunsetColor, t);
+        } else {
+            // Sunset to night
+            float t = (timeOfDay - 0.7f) / 0.3f;
+            lightColor = glm::mix(sunsetColor, nightColor, t);
+        }
+
+        // Adjust light direction for sun position
+        float sunAngle = currentFrame * cycleSpeed;
+        glm::vec3 lightDir = glm::normalize(glm::vec3(
+            cos(sunAngle) * 0.6f,
+            -sin(sunAngle) * 0.8f,
+            -0.3f
+        ));
+
+        // Update sky background color
+        glm::vec3 skyDayColor = glm::vec3(0.529f, 0.808f, 0.922f);    // Bright blue
+        glm::vec3 skyNightColor = glm::vec3(0.05f, 0.05f, 0.15f);     // Dark blue
+        glm::vec3 skySunsetColor = glm::vec3(0.8f, 0.4f, 0.3f);       // Orange sky
+
+        glm::vec3 skyColor;
+        if (timeOfDay < 0.3f) {
+            float t = timeOfDay / 0.3f;
+            skyColor = glm::mix(skyNightColor, skySunsetColor, t);
+        } else if (timeOfDay < 0.5f) {
+            float t = (timeOfDay - 0.3f) / 0.2f;
+            skyColor = glm::mix(skySunsetColor, skyDayColor, t);
+        } else if (timeOfDay < 0.7f) {
+            float t = (timeOfDay - 0.5f) / 0.2f;
+            skyColor = glm::mix(skyDayColor, skySunsetColor, t);
+        } else {
+            float t = (timeOfDay - 0.7f) / 0.3f;
+            skyColor = glm::mix(skySunsetColor, skyNightColor, t);
+        }
+
+        // Apply to clear color (move this BEFORE glClear on line 182)
+        glClearColor(skyColor.r, skyColor.g, skyColor.b, 1.0f);
+
+
+        defaultShader.setVec3("lightDirection", lightDir);
         defaultShader.setVec3("lightColor", lightColor);
         defaultShader.setVec3("viewPos", camera.Position);
-        defaultShader.setFloat("shininess", 32.0f);
+        defaultShader.setFloat("shininess", 16.0f);
 
         // CASTLE FOR THE COURTYARD
         glm::mat4 castelMatrix = glm::mat4(1.0f);
@@ -212,7 +337,6 @@ int main()
 
         defaultShader.setMat4("model",wizard1Matrix);
         wizard1Model.Draw(defaultShader);
-        
 
         //wizard 2
         glm::mat4 wizard2Matrix = glm::mat4(1.0f);
@@ -233,6 +357,7 @@ int main()
         defaultShader.setMat4("model", wizard3Matrix);
         wizard3Model.Draw(defaultShader);
 
+        
         //wizard 4
         //This is the bigger model 
         glm::mat4 wizard4Matrix = glm::mat4(1.0f);
@@ -243,6 +368,49 @@ int main()
 
         defaultShader.setMat4("model", wizard4Matrix);
         wizard4Model.Draw(defaultShader);
+
+        glDepthMask(GL_FALSE);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+        particleShader.use();
+        particleShader.setMat4("projection", projection);
+        particleShader.setMat4("view", view);
+
+        static bool debugPrinted = false;
+        if (!debugPrinted) {
+            std::cout << "Drawing particles..." << std::endl;
+            debugPrinted = true;
+        }
+        
+        DrawSimpleParticleSpell(particleShader, simpleParticle, headWizardMatrix, 
+                            camera.Position, camera.Right, camera.Up, currentFrame,
+                            70, 4.0f, 2.0f, 2.0f, 2.0f, 0.4f, 
+                               glm::vec3(0.8f, 0.3f, 1.0f)); // Purple for head wizard
+        
+        DrawSimpleParticleSpell(particleShader, simpleParticle, wizard1Matrix,
+                            camera.Position, camera.Right, camera.Up, currentFrame,
+                            50, 3.0f, 1.5f, 2.5f, 2.2f, 0.5f,
+                               glm::vec3(0.3f, 1.0f, 0.3f)); // Green
+        
+        DrawSimpleParticleSpell(particleShader, simpleParticle, wizard2Matrix,
+                            camera.Position, camera.Right, camera.Up, currentFrame,
+                            60, 3.5f, 1.8f, 2.3f, 2.1f, 0.45f,
+                               glm::vec3(1.0f, 0.3f, 0.3f)); // Red
+        
+        DrawSimpleParticleSpell(particleShader, simpleParticle, wizard3Matrix,
+                            camera.Position, camera.Right, camera.Up, currentFrame,
+                            55, 3.2f, 1.6f, 2.4f, 2.3f, 0.48f,
+                               glm::vec3(0.3f, 0.6f, 1.0f)); // Blue
+        
+        DrawSimpleParticleSpell(particleShader, simpleParticle, wizard4Matrix,
+                            camera.Position, camera.Right, camera.Up, currentFrame,
+                            65, 3.8f, 2.0f, 2.2f, 2.0f, 0.42f,
+                               glm::vec3(1.0f, 0.9f, 0.3f)); // Gold
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDepthMask(GL_TRUE);
+        glDisable(GL_BLEND);
 
         // 5.4 Swapping the buffers
         glfwSwapBuffers(window);
@@ -274,8 +442,6 @@ void processInput(GLFWwindow *window)
         camera.ProcessKeyboard(UP, deltaTime);
     if(glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
         camera.ProcessKeyboard(DOWN, deltaTime);
-    if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, deltaTime);
 
 
 }
@@ -288,10 +454,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 void mouse_callback(GLFWwindow* window, double xPos, double yPos)
 {
     float xpos = static_cast<float>(xPos);
-    std::cout << "this is xPos: " << xpos << std::endl;
 
     float ypos = static_cast<float>(yPos);
-    std::cout << "this is yPos: " << ypos << std::endl;
 
     if (firstMouse)
     {
@@ -317,3 +481,140 @@ void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
     camera.ProcessMouseScroll(static_cast<float>(yOffset));
 }
 
+void DrawParticleSpell(
+    Shader &shader,
+    Model &particleModel,
+    const glm::mat4 &parentModel,
+    float time,
+    int numLeaves,
+    float radius,
+    float verticalAmp,
+    float verticalSpeed,
+    float orbitSpeed,
+    float phasePerLeaf
+)
+{
+    // Extract world-space parent position (unscaled)
+    glm::vec3 parentPos = glm::vec3(
+        parentModel[3].x,
+        parentModel[3].y,
+        parentModel[3].z
+    );
+
+    // Extract parent's rotation ONLY (ignore scale)
+    glm::mat3 parentRot = glm::mat3(
+        glm::normalize(glm::vec3(parentModel[0])),
+        glm::normalize(glm::vec3(parentModel[1])),
+        glm::normalize(glm::vec3(parentModel[2]))
+    );
+
+    glm::vec3 right   = parentRot[0];
+    glm::vec3 up      = parentRot[1];
+    glm::vec3 forward = parentRot[2];
+
+    // Build list of particle world positions with distance for depth sorting
+    std::vector<std::pair<float, glm::vec3>> particles;
+    particles.reserve(numLeaves);
+
+    for (int i = 0; i < numLeaves; ++i) {
+        float angle = time * orbitSpeed + i * phasePerLeaf;
+        
+        // Create circular motion with vertical oscillation
+        glm::vec3 offset =
+            right   * (radius * cos(angle)) +
+            forward * (radius * sin(angle)) +
+            up      * (verticalAmp * sin(time * verticalSpeed + i * 0.3f));
+        
+        glm::vec3 pos = parentPos + offset;
+        float dist = glm::length(camera.Position - pos);
+        particles.emplace_back(dist, pos);
+    }
+
+    // Sort particles by distance (farthest first) for proper alpha blending
+    std::sort(particles.begin(), particles.end(),
+        [](const auto &a, const auto &b) { return a.first > b.first; });
+
+    // Render each particle
+    for (const auto &p : particles) {
+        glm::vec3 pos = p.second;
+        
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, pos);
+        model = glm::scale(model, glm::vec3(0.5f));
+        
+        shader.setMat4("model", model);
+        shader.setVec3("cameraRight", camera.Right);
+        shader.setVec3("cameraUp", camera.Up);
+        shader.setFloat("size", 0.6f);
+        
+        particleModel.Draw(shader);
+    }
+}
+
+void DrawSimpleParticleSpell(
+    Shader &shader,
+    SimpleParticle &particle,
+    const glm::mat4 &parentModel,
+    const glm::vec3 &cameraPos,
+    const glm::vec3 &cameraRight,
+    const glm::vec3 &cameraUp,
+    float time,
+    int numParticles,
+    float radius,
+    float verticalAmp,
+    float verticalSpeed,
+    float orbitSpeed,
+    float phasePerParticle,
+    glm::vec3 color
+)
+{
+    // Extract parent position
+    glm::vec3 parentPos = glm::vec3(parentModel[3]);
+    
+    // Extract parent rotation (normalized)
+    glm::mat3 parentRot = glm::mat3(
+        glm::normalize(glm::vec3(parentModel[0])),
+        glm::normalize(glm::vec3(parentModel[1])),
+        glm::normalize(glm::vec3(parentModel[2]))
+    );
+    
+    glm::vec3 right = parentRot[0];
+    glm::vec3 up = parentRot[1];
+    glm::vec3 forward = parentRot[2];
+    
+    // Generate and sort particles
+    std::vector<std::pair<float, glm::vec3>> particles;
+    particles.reserve(numParticles);
+    
+    for (int i = 0; i < numParticles; ++i) {
+        float angle = time * orbitSpeed + i * phasePerParticle;
+        float verticalOffset = verticalAmp * sin(time * verticalSpeed + i * 0.3f);
+        
+        glm::vec3 offset = 
+            right * (radius * cos(angle)) +
+            forward * (radius * sin(angle)) +
+            up * verticalOffset;
+        
+        glm::vec3 pos = parentPos + offset;
+        float dist = glm::length(cameraPos - pos);
+        particles.emplace_back(dist, pos);
+    }
+    
+    // Sort by distance (far to near)
+    std::sort(particles.begin(), particles.end(),
+        [](const auto &a, const auto &b) { return a.first > b.first; });
+    
+    // Draw particles
+    for (size_t i = 0; i < particles.size(); ++i) {
+        glm::vec3 pos = particles[i].second;
+        float alpha = 0.7f + 0.3f * sin(time * 3.0f + i * 0.2f);
+        
+        shader.setVec3("particlePos", pos);
+        shader.setVec3("cameraRight", cameraRight);
+        shader.setVec3("cameraUp", cameraUp);
+        shader.setFloat("particleSize", 1.2f);
+        shader.setVec4("particleColor", glm::vec4(color, alpha));
+        
+        particle.Draw();
+    }
+}
