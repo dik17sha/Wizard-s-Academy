@@ -86,13 +86,13 @@ target_include_directories(WizardAcademy PRIVATE
 )
 
 # Compiler warnings (optional)
-if(MSVC)
-	target_compile_options(WizardAcademy PRIVATE /W3)
-else()
-	target_compile_options(WizardAcademy PRIVATE -Wall -Wextra -Wpedantic)
-endif()
+# if(MSVC)
+# 	target_compile_options(WizardAcademy PRIVATE /W3)
+# else()
+# 	target_compile_options(WizardAcademy PRIVATE -Wall -Wextra -Wpedantic)
+# ndif()
 
-message(STATUS "Sources: ${PROJECT_SOURCES}")
+#message(STATUS "Sources: ${PROJECT_SOURCES}")
 
 # Copy shader source files into the build directory so the runtime can find
 # shaders referenced by relative names like "basic.vs" and "basic.fs".
