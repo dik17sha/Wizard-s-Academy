@@ -7,15 +7,19 @@ C_DEFINES = -DGLM_ENABLE_EXPERIMENTAL -DGL_SILENCE_DEPRECATION
 
 C_INCLUDES = -I/Users/dchottani/Desktop/Wizard-s-Academy/libs/include -I"/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Header Files" -I/Users/dchottani/Desktop/Wizard-s-Academy/libs/src -I/Users/dchottani/Desktop/Wizard-s-Academy/libs/lib -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks
 
-C_FLAGSarm64 =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk
+C_FLAGSarm64 =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -Wall -Wextra -Wconversion
 
-C_FLAGS =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk
+C_FLAGS =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -Wall -Wextra -Wconversion
 
 CXX_DEFINES = -DGLM_ENABLE_EXPERIMENTAL -DGL_SILENCE_DEPRECATION
 
 CXX_INCLUDES = -I/Users/dchottani/Desktop/Wizard-s-Academy/libs/include -I"/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Header Files" -I/Users/dchottani/Desktop/Wizard-s-Academy/libs/src -I/Users/dchottani/Desktop/Wizard-s-Academy/libs/lib -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks
 
-CXX_FLAGSarm64 = -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk
+CXX_FLAGSarm64 = -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -Wall -Wextra -Wconversion
 
-CXX_FLAGS = -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk
+CXX_FLAGS = -std=gnu++14 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -Wall -Wextra -Wconversion
+
+# Custom flags: CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o_FLAGS = -Wno-sign-conversion -Wno-unused-parameter
+
+# Custom flags: CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o_FLAGS = -Wno-sign-conversion -Wno-unused-parameter
 

@@ -46,7 +46,6 @@ void main()
     vec3 tonedLight = mix(coolColor, warmColor, toneBlend);
     
 
-    // IMPROVEMENT 6: Distance-based fog for depth and atmosphere
     float fogStart = 50.0;
     float fogEnd = 300.0;
     vec3 fogColor = vec3(0.6, 0.7, 0.85); 

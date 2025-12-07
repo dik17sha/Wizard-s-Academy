@@ -136,7 +136,7 @@ private:
         Front = glm::normalize(front);
         
         //Also re-calculating the Right and Up vector
-        Right = glm::normalize(glm::cross(Front, WorldUp));  //Normalizing the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+        Right = glm::normalize(glm::cross(Front, WorldUp));  
         Up    = glm::normalize(glm::cross(Right, Front));
     }
 

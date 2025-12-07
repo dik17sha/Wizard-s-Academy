@@ -42,7 +42,7 @@ class Model
     bool gammaCorrection;
 
     //Constructor 
-    //My model will be loaded here
+    //My model will be loaded using this
     Model(std::string const &path, bool gamma = false) : gammaCorrection(gamma)
     {
         std::cout << "The path i am using is: " << path << std::endl;
@@ -81,7 +81,7 @@ class Model
 
     }
 
-    //Processes a node recursivley 
+
     void processNode(aiNode* node, const aiScene* scene)
     {
         for(unsigned int i =0; i < node->mNumMeshes; i++)
@@ -108,13 +108,13 @@ class Model
             Vertex vertex;
             glm::vec3 vector;
 
-            //Postions
+            //Postion
             vector.x = mesh->mVertices[i].x;
             vector.y = mesh->mVertices[i].y;
             vector.z = mesh->mVertices[i].z;
             vertex.Position = vector;
 
-            //Normals
+            //Norma
             if(mesh->HasNormals())
             {
                 vector.x = mesh->mNormals[i].x;
@@ -175,12 +175,12 @@ class Model
         std::vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
         
-        // return a mesh object created from the extracted mesh data
+        // returning mesh
         return Mesh(vertices, indices, textures);
 
     }
 
-    //Loads textures from the materials
+    //Loading textures 
     std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 {
     std::vector<Texture> textures;
@@ -198,7 +198,7 @@ class Model
 
         bool skip = false;
 
-        // Check if we've already loaded this texture
+
         for (unsigned int j = 0; j < texturesLoaded.size(); j++)
         {
             if (std::strcmp(texturesLoaded[j].path.data(), pathStr.c_str()) == 0)
@@ -208,8 +208,7 @@ class Model
                 break;
             }
         }
-
-        // Only load if not already loaded
+        
         if (!skip)
         {
             std::string fullPath = this->directory + '/' + pathStr;
@@ -245,7 +244,7 @@ unsigned int TextureFromFile(const char *path, const std::string &directory, boo
     unsigned char *data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
     if (data)
     {
-        GLenum format;
+        GLenum format = 0;
         if (nrComponents == 1)
             format = GL_RED;
         else if (nrComponents == 3)

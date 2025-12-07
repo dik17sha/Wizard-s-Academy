@@ -1,6 +1,6 @@
 #version 330 core
-layout (location = 0) in vec2 aPos;      // 2D quad position
-layout (location = 1) in vec2 aTexCoord; // Texture coordinates
+layout (location = 0) in vec2 aPos;      
+layout (location = 1) in vec2 aTexCoord; 
 
 out vec2 TexCoords;
 out vec3 WorldPos;
@@ -14,9 +14,7 @@ uniform mat4 projection;
 
 void main()
 {
-    vec3 vertexPosition = particlePos 
-        + cameraRight * aPos.x * particleSize
-        + cameraUp * aPos.y * particleSize;
+    vec3 vertexPosition = particlePos + cameraRight * aPos.x * particleSize + cameraUp * aPos.y * particleSize;
     
     vec4 viewPos = view * vec4(vertexPosition, 1.0);
     gl_Position = projection * viewPos;

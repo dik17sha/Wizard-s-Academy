@@ -20,9 +20,32 @@ file(GLOB_RECURSE PROJECT_SOURCES
 # Add executable
 add_executable(WizardAcademy ${PROJECT_SOURCES})
 
+
 # Ensure GLAD C sources are explicitly added (handles spaces and glob quirks)
+# --- MODIFIED: Target specific compile options for STB_IMAGE.C ---
 target_sources(WizardAcademy PRIVATE
-	"${CMAKE_SOURCE_DIR}/libs/src/glad.c"
+    # Add STB Image implementation, applying flags to suppress warnings inside it.
+    # Note: If your STB_IMAGE implementation is in a file like 'stb_image_impl.cpp', use that path.
+    # Based on your output, I'll assume you have a file named 'stb_image_impl.cpp'
+    "${CMAKE_SOURCE_DIR}/Wizard Academy/Source Files/stb_image_impl.cpp"
+)
+
+# Apply STB warning suppression flags only to the STB implementation file
+# The flags -Wno-sign-conversion and -Wno-unused-parameter are highly effective here.
+set_source_files_properties(
+    "${CMAKE_SOURCE_DIR}/Wizard Academy/Source Files/stb_image_impl.cpp"
+    PROPERTIES
+    COMPILE_FLAGS "-Wno-sign-conversion -Wno-unused-parameter"
+)
+
+# The glad.c is often compiled as a C file, so we apply the flags specifically
+target_sources(WizardAcademy PRIVATE
+    "${CMAKE_SOURCE_DIR}/libs/src/glad.c"
+)
+set_source_files_properties(
+    "${CMAKE_SOURCE_DIR}/libs/src/glad.c"
+    PROPERTIES
+    COMPILE_FLAGS "-Wno-sign-conversion -Wno-unused-parameter"
 )
 
 # On macOS we need to link the OpenGL framework. For other platforms, prefer OpenGL::GL
@@ -86,11 +109,19 @@ target_include_directories(WizardAcademy PRIVATE
 )
 
 # Compiler warnings (optional)
-# if(MSVC)
-# 	target_compile_options(WizardAcademy PRIVATE /W3)
-# else()
-# 	target_compile_options(WizardAcademy PRIVATE -Wall -Wextra -Wpedantic)
-# ndif()
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    # For GCC/Clang (most common on Linux/macOS)
+    target_compile_options(WizardAcademy PRIVATE 
+        -Wall           # Enable all common warnings
+        -Wextra         # Enable extra warnings (often useful)
+        -Wconversion    # Warn about implicit type conversions (a common issue)
+    )
+elseif(MSVC)
+    # For Microsoft Visual Studio Compiler
+    target_compile_options(WizardAcademy PRIVATE 
+        /W4             # High warning level 4
+    )
+endif()
 
 #message(STATUS "Sources: ${PROJECT_SOURCES}")
 

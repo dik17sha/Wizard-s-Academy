@@ -19,7 +19,7 @@
 #include"shader.h"
 
 
-// Defining structure for Vertex
+
 struct Vertex {
     glm::vec3 Position;
     glm::vec3 Color;
@@ -32,7 +32,7 @@ struct Vertex {
 
 };
 
-//Defining structure for Texture
+
 struct Texture{
     unsigned int id;
     std::string type;
@@ -59,7 +59,7 @@ Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vecto
 
 }
 
-//Function to render the mesh
+//render the mesh - func
 void Draw(Shader& shader)
 {
     //Binding the appropriate textures
@@ -98,27 +98,25 @@ void Draw(Shader& shader)
 }
 
 private:
-    //Initializing all the buffer objects
+
     unsigned int VBO, EBO;
 
     void setupMesh()
     {
-        //creating the buffers and arrays 
+        //creating bufferss
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
         glGenBuffers(1, &EBO);
 
         glBindVertexArray(VAO);
 
-        //Loading data into vertex buffers
+        //Loading data in VBO
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);  
 
-        //Setting the vertex attribute pointers
-        //Vertex Positions
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 
@@ -137,10 +135,12 @@ private:
         //Vertex Bitangents
         glEnableVertexAttribArray(4);
         glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
-            //ids
+        
+        //ids
         glEnableVertexAttribArray(5);
         glVertexAttribIPointer(5, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
-            //weights
+        
+        //weights
         glEnableVertexAttribArray(6);
         glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Weights));    
 

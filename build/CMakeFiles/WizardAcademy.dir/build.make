@@ -132,29 +132,29 @@ CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o: C
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o: /Users/dchottani/Desktop/Wizard-s-Academy/Wizard\ Academy/Source\ Files/stb_image_impl.cpp
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-sign-conversion -Wno-unused-parameter -MD -MT CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o -MF CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o.d -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.o -c "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp"
 
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" > CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-sign-conversion -Wno-unused-parameter -E "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" > CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.i
 
 CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -Wno-sign-conversion -Wno-unused-parameter -S "/Users/dchottani/Desktop/Wizard-s-Academy/Wizard Academy/Source Files/stb_image_impl.cpp" -o CMakeFiles/WizardAcademy.dir/Wizard_Academy/Source_Files/stb_image_impl.cpp.s
 
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o: CMakeFiles/WizardAcademy.dir/flags.make
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o: /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o: CMakeFiles/WizardAcademy.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/dchottani/Desktop/Wizard-s-Academy/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o -MF CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o.d -o CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o -c /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wno-sign-conversion -Wno-unused-parameter -MD -MT CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o -MF CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o.d -o CMakeFiles/WizardAcademy.dir/libs/src/glad.c.o -c /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c
 
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/WizardAcademy.dir/libs/src/glad.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c > CMakeFiles/WizardAcademy.dir/libs/src/glad.c.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wno-sign-conversion -Wno-unused-parameter -E /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c > CMakeFiles/WizardAcademy.dir/libs/src/glad.c.i
 
 CMakeFiles/WizardAcademy.dir/libs/src/glad.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/WizardAcademy.dir/libs/src/glad.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c -o CMakeFiles/WizardAcademy.dir/libs/src/glad.c.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wno-sign-conversion -Wno-unused-parameter -S /Users/dchottani/Desktop/Wizard-s-Academy/libs/src/glad.c -o CMakeFiles/WizardAcademy.dir/libs/src/glad.c.s
 
 # Object files for target WizardAcademy
 WizardAcademy_OBJECTS = \
