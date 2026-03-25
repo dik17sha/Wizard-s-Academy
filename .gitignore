@@ -1,0 +1,87 @@
+# ─── Build Artifacts ───────────────────────────────────────────
+build/
+out/
+bin/
+lib/
+*.o
+*.a
+*.so
+*.so.*
+*.dll
+*.dylib
+*.exe
+*.out
+*.app
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+Makefile
+
+# Meson
+.mesonpy/
+meson-info/
+meson-logs/
+meson-private/
+
+# ─── Compiled Shaders ──────────────────────────────────────────
+*.spv
+*.spirv
+
+# ─── Dependencies (if vendored via submodules or package dirs) ─
+deps/
+third_party/
+external/
+vcpkg_installed/
+
+# ─── IDE & Editor ──────────────────────────────────────────────
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln
+*.vcxproj.user
+.idea/
+*.iml
+*.clangd
+.clang-tidy
+.cache/
+
+# Emacs
+*~
+\#*\#
+.\#*
+*.elc
+
+# ─── Debug & Profiling ─────────────────────────────────────────
+*.pdb
+*.ilk
+*.exp
+gmon.out
+callgrind.out.*
+perf.data
+perf.data.old
+
+# ─── Logs & Temp ───────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ─── OS-generated ──────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ─── Environment ───────────────────────────────────────────────
+.env
+.env.local
