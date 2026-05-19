@@ -89,7 +89,7 @@ The environment simulates a procedural lighting cycle consisting of **Day**, **S
   https://github.com/dik17sha/Wizard-s-Academy
 
 - **Video Demo:**  
-  https://youtu.be/rMm-r9_Tylk
+  [https://youtu.be/rMm-r9_Tylk](https://youtu.be/rMm-r9_Ty1k)
 
 ---
 
